@@ -7,7 +7,7 @@ public class Opgave5 {
     public static void main(String[] args) {
         List<String> list = new ArrayList<>(List.of("Jan Jensen", "Jens Hansen", "Leo Hansen", "Jens Jensen", "Jensine Larsen"));
         System.out.println(countDelStrengIt(list, "Jens"));
-        System.out.println(countDelStrengrec(list, "Jens"));
+        System.out.println(countDelStrengrec(list, "en"));
     }
 
     public static int countDelStrengIt(List<String> list, String sub) {
@@ -34,7 +34,7 @@ public class Opgave5 {
         int i = 0;
         int counter = 0;
         int subLength = sub.length();
-        while (i < s.length()-subLength) {
+        while (i < s.length()-subLength+1) {
             if (s.substring(i,subLength+i).equals(sub)) {
                 counter++;
             }
@@ -46,7 +46,7 @@ public class Opgave5 {
     public static int countStringRecursive(String s, String sub, int i) {
         int counter = 0;
         int subLength = sub.length();
-        if (i < s.length()-subLength) {
+        if (i < s.length()-subLength+1) {
             if (s.substring(i, subLength + i).equals(sub)) {
                 counter++;
             }
