@@ -54,32 +54,32 @@ public class Gui extends Application {
                 drawTriangle(pane, count, top, left, right);
         }
 
-        private void drawTriangle(Pane pane, int levels, Point top, Point left, Point right) {
-                if (levels < 0) {
+        private void drawTriangle(Pane pane, int amount, Point top, Point left, Point right) {
+                if (amount < 0) {
                         return;
                 }
 
-                Polygon tri = new Polygon();
-                tri.getPoints().addAll(
+                Polygon polygon = new Polygon();
+                polygon.getPoints().addAll(
                         top.getX(), top.getY(),
                         left.getX(), left.getY(),
                         right.getX(), right.getY()
                 );
 
-                tri.setFill(Color.WHITE);
-                tri.setStroke(Color.BLACK);
-                pane.getChildren().add(tri);
+                polygon.setFill(Color.WHITE);
+                polygon.setStroke(Color.BLACK);
+                pane.getChildren().add(polygon);
 
-                Point p12 = midpoint(top, left);
-                Point p23 = midpoint(left, right);
-                Point p31 = midpoint(right, top);
+                Point midP1AndP2 = midpoint(top, left);
+                Point midP2AndP3 = midpoint(left, right);
+                Point MindP3AndP1 = midpoint(right, top);
 
-                drawTriangle(pane, levels - 1, top, p12, p31);
-                drawTriangle(pane, levels - 1, p12, left, p23);
-                drawTriangle(pane, levels - 1, p31, p23, right);
+                drawTriangle(pane, amount - 1, top, midP1AndP2, MindP3AndP1);
+                drawTriangle(pane, amount - 1, midP1AndP2, left, midP2AndP3);
+                drawTriangle(pane, amount - 1, MindP3AndP1, midP2AndP3, right);
         }
 
-        private static Point midpoint(Point p1, Point p2) {
-                return new Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
+        private static Point midpoint(Point point1, Point point2) {
+                return new Point((point1.x + point2.x) / 2, (point1.y + point2.y) / 2);
         }
 }
