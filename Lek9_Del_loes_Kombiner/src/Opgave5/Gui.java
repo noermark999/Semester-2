@@ -12,6 +12,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.*;
+
 public class Gui extends Application {
 
         private final int WIDTH = 1000;
@@ -41,28 +43,43 @@ public class Gui extends Application {
         private void drawShapes(Pane pane) {
                 Button button = new Button("Tegn");
                 pane.getChildren().add(button);
-                button.setOnAction(Event -> this.drawTrekant(count, pane));
+                button.setOnAction(Event -> this.actionHandler(pane));
         }
 
-        private void drawTrekant(int amount, Pane pane) {
+        private void actionHandler(Pane pane) {
                 count++;
-                drawTrekant(amount, 1, pane, 500,0,0,1000,1000,1000 );
+                Point top = new Point(500, 0);
+                Point left = new Point(0, 1000);
+                Point right = new Point(1000, 1000);
+                drawTriangle(pane, count, top, left, right);
         }
 
-        private void drawTrekant(int amount, int amount1, Pane pane, double x1, double y1, double x2, double y2, double x3, double y3) {
-                if (amount>=amount1) {
-                        System.out.println("here");
-                        drawTrekant(amount,amount1+1,pane,((x1+x2)/2),((y1+y2)/2),((x2+x3)/2),((y2+y3)/2),((x1+x3)/2),((y1+y3)/2));
-                } else {
-                        System.out.println("not here");
-                        Polygon polygon = new Polygon();
-                        polygon.getPoints().addAll(
-                                x1, y1,
-                                x2, y2,
-                                x3, y3);
-                        polygon.setFill(Color.WHITE);
-                        polygon.setStroke(Color.BLACK);
-                        pane.getChildren().add(polygon);
+        private void drawTriangle(Pane pane, int levels, Point top, Point left, Point right) {
+                if (levels < 0) {
+                        return;
                 }
+
+                Polygon tri = new Polygon();
+                tri.getPoints().addAll(
+                        top.getX(), top.getY(),
+                        left.getX(), left.getY(),
+                        right.getX(), right.getY()
+                );
+
+                tri.setFill(Color.WHITE);
+                tri.setStroke(Color.BLACK);
+                pane.getChildren().add(tri);
+
+                Point p12 = midpoint(top, left);
+                Point p23 = midpoint(left, right);
+                Point p31 = midpoint(right, top);
+
+                drawTriangle(pane, levels - 1, top, p12, p31);
+                drawTriangle(pane, levels - 1, p12, left, p23);
+                drawTriangle(pane, levels - 1, p31, p23, right);
+        }
+
+        private static Point midpoint(Point p1, Point p2) {
+                return new Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
         }
 }
