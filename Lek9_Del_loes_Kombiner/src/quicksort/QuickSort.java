@@ -15,7 +15,6 @@ public class QuickSort {
             int p = partition(list, low, high);
             quickSort(list, low, p - 1);
             quickSort(list, p + 1, high);
-            
         }
     }
     

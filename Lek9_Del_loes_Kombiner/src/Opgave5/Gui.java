@@ -3,6 +3,7 @@ package Opgave5;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -16,9 +17,9 @@ import java.awt.*;
 
 public class Gui extends Application {
 
-        private final int WIDTH = 1000;
-        private final int HEIGHT = 1000;
-        private int count = 0;
+        private final int WIDTH = 250;
+        private final int HEIGHT = 250;
+        private int count;
 
         @Override
         public void start(Stage stage) {
@@ -48,9 +49,9 @@ public class Gui extends Application {
 
         private void actionHandler(Pane pane) {
                 count++;
-                Point top = new Point(500, 0);
-                Point left = new Point(0, 1000);
-                Point right = new Point(1000, 1000);
+                Point top = new Point(WIDTH/2, 0);
+                Point left = new Point(0, HEIGHT);
+                Point right = new Point(WIDTH, HEIGHT);
                 drawTriangle(pane, count, top, left, right);
         }
 
@@ -70,16 +71,12 @@ public class Gui extends Application {
                 polygon.setStroke(Color.BLACK);
                 pane.getChildren().add(polygon);
 
-                Point midP1AndP2 = midpoint(top, left);
-                Point midP2AndP3 = midpoint(left, right);
-                Point MindP3AndP1 = midpoint(right, top);
+                Point midP1AndP2 = new Point ((int) ((top.getX() + left.getX()) / 2), (int) ((top.getY() + left.getY()) / 2));
+                Point midP2AndP3 = new Point ((int) ((left.getX() + right.getX()) / 2), (int) ((left.getY() + right.getY()) / 2));
+                Point MindP3AndP1 = new Point ((int) ((right.getX() + top.getX()) / 2), (int) ((right.getY() + top.getY()) / 2));
 
                 drawTriangle(pane, amount - 1, top, midP1AndP2, MindP3AndP1);
                 drawTriangle(pane, amount - 1, midP1AndP2, left, midP2AndP3);
                 drawTriangle(pane, amount - 1, MindP3AndP1, midP2AndP3, right);
-        }
-
-        private static Point midpoint(Point point1, Point point2) {
-                return new Point((point1.x + point2.x) / 2, (point1.y + point2.y) / 2);
         }
 }
