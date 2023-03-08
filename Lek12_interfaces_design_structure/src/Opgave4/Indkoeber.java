@@ -9,6 +9,11 @@ public class Indkoeber implements Observer{
 
     @Override
     public void update(Subject s) {
-
+        BogTitel bogTitel = (BogTitel) s;
+        if (bogTitel.getAntal() < 6) {
+            System.out.println("Der skal bestilles 10 bøger mere af " + bogTitel.getTitel());
+            bogTitel.indkoebTilLager(10);
+            System.out.println();
+        }
     }
 }
