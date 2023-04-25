@@ -55,6 +55,22 @@ public class SortedLinkedList {
 		return count;
 	}
 
+	public int countElementsRec() {
+		int count = 0;
+		Node temp = first;
+		count += countElementsRecHelper(temp);
+		return count;
+	}
+
+	public int countElementsRecHelper(Node node) {
+		int count = 0;
+		if (node != null) {
+			count++;
+			count += countElementsRecHelper(node.next);
+		}
+		return count;
+	}
+
 	
 	/**
 	 * Fjerner det sidste (altså det største) element i listen. Listen skal fortsat være
@@ -111,7 +127,18 @@ public class SortedLinkedList {
 		}
 	}
 
-	
+	/**
+	 * Tilføjer alle elementerne fra list til den aktuelle liste.
+	 * Listen er fortsat sorteret i henhold til den naturlige ordning på
+	 * elementerne.
+	 */
+	public void addAll(SortedLinkedList list) {
+		Node temp = list.first;
+		while (temp != null) {
+			addElement(temp.data);
+			temp = temp.next;
+		}
+	}
 	
 	// Privat indre klasse der modellerer en node i listen
 	private class Node {

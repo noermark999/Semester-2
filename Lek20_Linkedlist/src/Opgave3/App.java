@@ -9,27 +9,27 @@ public class App {
         list.addElement("Plante");
         list.addElement("Fugl");
         list.addElement("Engel");
-        System.out.println("Forfra:");
+        System.out.println("Forfra: " + " størrelse: " + list.countElements());
         list.udskrivElements();
 
         System.out.println();
-        System.out.println("Bagfra");
+        System.out.println("Bagfra " + " størrelse: " + list.countElements());
         list.udskrivBagfra();
 
         list.removeElement("Engel");
         System.out.println();
-        System.out.println("Forfra:");
+        System.out.println("Forfra: " + " størrelse: " + list.countElements());
         list.udskrivElements();
         System.out.println();
-        System.out.println("Bagfra");
+        System.out.println("Bagfra " + " størrelse: " + list.countElements());
         list.udskrivBagfra();
 
         list.removeElement("Plante");
         System.out.println();
-        System.out.println("Forfra:");
+        System.out.println("Forfra: " + " størrelse: " + list.countElements());
         list.udskrivElements();
         System.out.println();
-        System.out.println("Bagfra");
+        System.out.println("Bagfra " + " størrelse: " + list.countElements());
         list.udskrivBagfra();
 
     }

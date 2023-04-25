@@ -49,6 +49,7 @@ public class SortedLinkedListDouble {
 				last = newNode;
 			}
 		}
+		size++;
 	}
 
 	/**
@@ -62,6 +63,7 @@ public class SortedLinkedListDouble {
 			if (first.data.equals(e)) {
 				first.next.prev = null;
 				first = first.next;
+				size--;
 				return true;
 			} else {
 				Node temp = first;
@@ -82,6 +84,7 @@ public class SortedLinkedListDouble {
 						last = temp;
 					}
 					temp2.next = null;
+					size--;
 					return true;
 				}
 				return false;
@@ -117,8 +120,7 @@ public class SortedLinkedListDouble {
 	 * Returnerer antallet af elementer i listen
 	 */
 	public int countElements() {
-		// TODO
-		return -1;
+		return size;
 	}
 
 	// Privat indre klasse der modellerer en node i en dobbeltkædet liste

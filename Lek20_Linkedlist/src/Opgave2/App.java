@@ -27,5 +27,19 @@ public class App {
         list.removeElement("Engel");
         list.udskrivElements();
 
+
+        System.out.println();
+        System.out.println("Test opgave 4");
+        SortedLinkedList list2 = new SortedLinkedList();
+        list2.addElement("Drage");
+        list2.addElement("Giraf");
+        list2.addElement("Zebra");
+        list.addAll(list2);
+        list.udskrivElements();
+
+        System.out.println();
+        System.out.println("Test Opgave 5");
+        System.out.println("Normal: " + list.countElements());
+        System.out.println("Recursive " + list.countElementsRec());
     }
 }
