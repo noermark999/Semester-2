@@ -62,7 +62,7 @@ public class SortedLinkedList {
 		return count;
 	}
 
-	public int countElementsRecHelper(Node node) {
+	private int countElementsRecHelper(Node node) {
 		int count = 0;
 		if (node != null) {
 			count++;
