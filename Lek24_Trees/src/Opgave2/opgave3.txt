@@ -1,0 +1,13 @@
+
+
+I hvilken rækkefølge vil data i ovenstående træ blive udskrevet ved hhv. preorder,
+inorder og postorder gennemløb?
+
+Preorder:
+45 22 11 15 30 25 77 90 88
+
+inorder:
+11 15 22 25 30 45 77 88 90
+
+Postorder:
+15 11 25 30 22 88 90 77 45
