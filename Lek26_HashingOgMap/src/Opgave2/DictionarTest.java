@@ -58,10 +58,10 @@ public class DictionarTest {
     public void testPut() {
         //Act
         dictionaryBil.put(bil1, 3);
-        int expected = 3;
+        int actual = dictionaryBil.get(bil1);
 
         //Assert
-        int actual = dictionaryBil.get(bil1);
+        int expected = 3;
         assertEquals(expected, actual);
 
     }
@@ -73,10 +73,10 @@ public class DictionarTest {
 
         //Act
         dictionaryBil.put(bil1,4);
-        int expected = 4;
+        int actual = dictionaryBil.get(bil1);
 
         //Assert
-        int actual = dictionaryBil.get(bil1);
+        int expected = 4;
         assertEquals(expected,actual);
     }
 
@@ -110,11 +110,15 @@ public class DictionarTest {
 
     @Test
     public void testEmpty1() {
+        //Act & assert
         assertTrue(dictionaryBil.isEmpty());
     }
     @Test
     public void testEmpty2() {
+        //arrange
         dictionaryBil.put(bil1,1);
+
+        //act & assert
         assertFalse(dictionaryBil.isEmpty());
     }
 
@@ -125,10 +129,10 @@ public class DictionarTest {
         dictionaryBil.put(bil2,3);
 
         //act
-        int expected = 2;
+        int actual = dictionaryBil.size();
 
         //assert
-        int actual = dictionaryBil.size();
+        int expected = 2;
         assertEquals(expected,actual);
     }
 
@@ -138,10 +142,10 @@ public class DictionarTest {
         dictionaryBil.put(bil1,5);
 
         //Act
-        int expected = 5;
+        int actual = dictionaryBil.get(bil1);
 
         //assert
-        int actual = dictionaryBil.get(bil1);
+        int expected = 5;
         assertEquals(expected,actual);
     }
 
@@ -151,11 +155,9 @@ public class DictionarTest {
         dictionaryBil.put(bil1,4);
         dictionaryBil.put(bil2,5);
 
-        //act
+        //Act & assert
         int expectedvalue = 5;
         int expectedsize = 1;
-
-        //assert
         assertEquals(expectedvalue,dictionaryBil.remove(bil2));
         assertEquals(expectedsize,dictionaryBil.size());
     }
