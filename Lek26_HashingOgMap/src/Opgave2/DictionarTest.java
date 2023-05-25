@@ -8,6 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DictionarTest {
     Dictionary<Integer, String> dictionaryInt;
     Dictionary<Bil,Integer> dictionaryBil;
+    Bil bil1;
+    Bil bil2;
+    Bil bil3;
+    Bil bil4;
    
 
     @BeforeEach
@@ -15,6 +19,10 @@ public class DictionarTest {
         // dictionary = new DictionaryHashMap<>();
         dictionaryInt = new DictionaryLinked<>();
         dictionaryBil = new DictionaryLinked<>();
+        bil1 = new Bil("BT 78 821", "Audi", "A3", "Sort");
+        bil2 = new Bil("AB 13 567", "Opel", "O3", "Blå");
+        bil3 = new Bil("YD 83 201", "Peugeot", "203", "Grå");
+        bil4 = new Bil("OL 12 912", "Tesla", "Speedster", "Hvid");
         
     }
     
@@ -47,37 +55,119 @@ public class DictionarTest {
     }
 
     @Test
-    public void testBilKey() {
-        Bil bil1 = new Bil("BT 78 821", "Audi", "A3", "Sort");
-        Bil bil2 = new Bil("AB 13 567", "Opel", "O3", "Blå");
-        Bil bil3 = new Bil("YD 83 201", "Peugeot", "203", "Grå");
-        Bil bil4 = new Bil("OL 12 912", "Tesla", "Speedster", "Hvid");
+    public void testPut() {
+        //Act
+        dictionaryBil.put(bil1, 3);
+        int expected = 3;
 
-        assertTrue(dictionaryBil.isEmpty());
-        assertEquals(0, dictionaryBil.size());
+        //Assert
+        int actual = dictionaryBil.get(bil1);
+        assertEquals(expected, actual);
 
-        dictionaryBil.put(bil1, 5);
-        dictionaryBil.put(bil2, 2);
-
-        assertFalse(dictionaryBil.isEmpty());
-        assertEquals(2, dictionaryBil.size());
-
-        assertEquals(5, dictionaryBil.get(bil1));
-
-        dictionaryBil.put(bil3, 1);
-        dictionaryBil.put(bil4, 7);
-
-        assertFalse(dictionaryBil.isEmpty());
-        assertEquals(4, dictionaryBil.size());
-
-        assertEquals(2, dictionaryBil.remove(bil2));
-
-        assertEquals(3, dictionaryBil.size());
-
-        assertEquals(5, dictionaryBil.put(bil1, 6));
-        assertEquals(6, dictionaryBil.get(bil1));
     }
 
-    
+    @Test
+    public void testPutFindesAllerede1() {
+        //Arrange
+        dictionaryBil.put(bil1,3);
+
+        //Act
+        dictionaryBil.put(bil1,4);
+        int expected = 4;
+
+        //Assert
+        int actual = dictionaryBil.get(bil1);
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testPutFindesAllerede2() {
+        //Arrange
+        dictionaryBil.put(bil1,3);
+
+        //Act & Assert
+        int expected = 3;
+        assertEquals(expected,dictionaryBil.put(bil1,4));
+    }
+
+    @Test
+    public void testPutFejl1() {
+        //Act & Assert
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            dictionaryBil.put(null,3);
+        });
+        assertEquals(exception.getMessage(),"Key eller value må ikke være null");
+    }
+
+    @Test
+    public void testPutFejl2() {
+        //Act & Assert
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            dictionaryBil.put(bil1,null);
+        });
+        assertEquals(exception.getMessage(),"Key eller value må ikke være null");
+    }
+
+    @Test
+    public void testEmpty1() {
+        assertTrue(dictionaryBil.isEmpty());
+    }
+    @Test
+    public void testEmpty2() {
+        dictionaryBil.put(bil1,1);
+        assertFalse(dictionaryBil.isEmpty());
+    }
+
+    @Test
+    public void testSize() {
+        //arrange
+        dictionaryBil.put(bil1,1);
+        dictionaryBil.put(bil2,3);
+
+        //act
+        int expected = 2;
+
+        //assert
+        int actual = dictionaryBil.size();
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testGet() {
+        //Arrange
+        dictionaryBil.put(bil1,5);
+
+        //Act
+        int expected = 5;
+
+        //assert
+        int actual = dictionaryBil.get(bil1);
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testRemove() {
+        //arrange
+        dictionaryBil.put(bil1,4);
+        dictionaryBil.put(bil2,5);
+
+        //act
+        int expectedvalue = 5;
+        int expectedsize = 1;
+
+        //assert
+        assertEquals(expectedvalue,dictionaryBil.remove(bil2));
+        assertEquals(expectedsize,dictionaryBil.size());
+    }
+
+    @Test
+    public void testRemove2() {
+        //arrange
+        dictionaryBil.put(bil2,5);
+        dictionaryBil.put(bil4,23);
+
+        //act & assert
+        assertNull(dictionaryBil.remove(bil1));
+    }
     
 }

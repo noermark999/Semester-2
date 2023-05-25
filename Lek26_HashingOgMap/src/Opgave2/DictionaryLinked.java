@@ -36,7 +36,7 @@ public class DictionaryLinked<K, V> implements Dictionary<K, V> {
 	@Override
 	public V put(K key, V value) {
 		if (key == null || value == null) {
-			throw  new IllegalArgumentException();
+			throw  new IllegalArgumentException("Key eller value må ikke være null");
 		}
 		Node temp = start;
 		while (temp.next != null) {
