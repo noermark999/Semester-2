@@ -23,5 +23,7 @@ public class DecisionTreeDemo {
 
 		System.out.println(fortyFive.sum());
 
+		fortyFive.postorder();
+
 	}
 }
