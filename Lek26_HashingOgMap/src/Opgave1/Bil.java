@@ -62,4 +62,5 @@ public class Bil {
     public int hashCode() {
         return Objects.hash(regNr, maerke);
     }
+
 }
